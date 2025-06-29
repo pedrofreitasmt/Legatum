@@ -11,6 +11,8 @@ import TextInput from '@/Components/TextInput.vue';
 const form = useForm({
     name: '',
     email: '',
+    phone: '',
+    cpf: '',
     password: '',
     password_confirmation: '',
     terms: false,
@@ -33,7 +35,7 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nome Completo" />
                 <TextInput
                     id="name"
                     v-model="form.name"
@@ -59,8 +61,33 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
+             <div class="mt-4">
+                <InputLabel for="cpf" value="CPF" />
+                <TextInput
+                    id="cpf"
+                    v-model="form.cpf"
+                    type="text"
+                    class="mt-1 block w-full cpf"
+                    required
+                    autocomplete="off"
+                />
+                <InputError class="mt-2" :message="form.errors.cpf" />
+            </div>
+
+             <div class="mt-4">
+                <InputLabel for="phone" value="Telefone" />
+                <TextInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="tel"
+                />
+                <InputError class="mt-2" :message="form.errors.phone" />
+            </div>
+
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Senha" />
                 <TextInput
                     id="password"
                     v-model="form.password"
@@ -73,7 +100,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" value="Confirmar Senha" />
                 <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
@@ -100,11 +127,11 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Already registered?
+                    Já possui uma conta? Entrar
                 </Link>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Registrar
                 </PrimaryButton>
             </div>
         </form>
