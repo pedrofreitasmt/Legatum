@@ -66,4 +66,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function testaments()
+    {
+        return $this->hasMany(Testament::class);
+    }
 }
