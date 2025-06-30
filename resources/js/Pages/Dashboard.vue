@@ -1,22 +1,29 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
     <AppLayout title="Dashboard">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-50 leading-tight">
                 Dashboard
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
+        <div class="flex justify-center mt-5 text-gray-50">
+            <section class="bg-black/50 w-[40rem] h-96  rounded-md">
+                <div class="flex justify-center mt-5 font-semibold">
+                    <h1 class="text-2xl text-white">Bem-vindo ao Legatum!</h1>
                 </div>
-            </div>
+
+                <div class="flex flex-col items-center gap-4 mt-5">
+                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3 rounded-md font-semibold text-xl"
+                        :href="route('testaments.index')">Meus Testamentos</Link>
+                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3  rounded-md font-semibold text-xl"
+                        :href="route('testaments.create')">Criar Testamento</Link>
+                </div>
+            </section>
         </div>
     </AppLayout>
 </template>
