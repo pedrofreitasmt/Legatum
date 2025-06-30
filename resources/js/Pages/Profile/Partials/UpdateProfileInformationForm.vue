@@ -17,6 +17,8 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
+    cpf: props.user.cpf,
+    phone: props.user.phone,
     photo: null,
 });
 
@@ -78,11 +80,11 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Informações do Perfil
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Atualize as informações do seu perfil e o endereço de e-mail.
         </template>
 
         <template #form>
@@ -130,7 +132,7 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nome" />
                 <TextInput
                     id="name"
                     v-model="form.name"
@@ -140,6 +142,32 @@ const clearPhotoFileInput = () => {
                     autocomplete="name"
                 />
                 <InputError :message="form.errors.name" class="mt-2" />
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="cpf" value="CPF" />
+                <TextInput
+                    id="cpf"
+                    v-model="form.cpf"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="cpf"
+                />
+                <InputError :message="form.errors.cpf" class="mt-2" />
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="phone" value="Telefone" />
+                <TextInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="phone"
+                />
+                <InputError :message="form.errors.phone" class="mt-2" />
             </div>
 
             <!-- Email -->
@@ -179,11 +207,11 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="me-3">
-                Saved.
+                Salvo.
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Salvar
             </PrimaryButton>
         </template>
     </FormSection>
