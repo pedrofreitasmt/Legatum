@@ -22,4 +22,9 @@ class Testament extends Model
     {
         return $this->hasMany(TestamentImage::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
