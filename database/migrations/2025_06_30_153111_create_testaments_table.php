@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->longText('content');
-            $table->timestamp('send_at');
+            $table->dateTime('send_at');
             $table->string('recipient_email');
             $table->boolean('is_encrypted')->default(true);
-            $table->timestamp('sent_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
             $table->string('status')->default('scheduled');
             $table->timestamps();
         });
