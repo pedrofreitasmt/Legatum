@@ -71,4 +71,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Testament::class);
     }
+
+    public function getTestamentsByDate(): User
+    {
+        return auth()->user()->load([
+            'testaments' => function ($query): void {
+                $query->orderByDesc('created_at');
+            },
+        ]);
+    }
 }
