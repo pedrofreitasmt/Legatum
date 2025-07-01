@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\StoreTestamentAction;
 use App\Http\Requests\StoreTestamentRequest;
-use App\Models\Testament;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,7 +13,7 @@ class TestamentController extends Controller
 {
     public function index(): Response
     {
-        $user = auth()->user();
+        $user = auth()->user()->getTestamentsByDate();
 
         return Inertia::render('Testament/Index', compact('user'));
     }
@@ -23,19 +23,11 @@ class TestamentController extends Controller
         return Inertia::render('Testament/Create');
     }
 
-    public function store(StoreTestamentRequest $request)
+    public function store(StoreTestamentRequest $request, StoreTestamentAction $storeTestamentAction): RedirectResponse
     {
-        $validatedData = $request->validated();
+        $storeTestamentAction->run($request);
 
-        $encryptedContent = encrypt($validatedData['content']);
-
-        $validatedData['content'] = $encryptedContent;
-
-        $validatedData['user_id'] = auth()->id();
-
-        Testament::create($validatedData);
-
-        return redirect()->route('dashboard');
+        return redirect()->route('testaments.index');
     }
 
     public function show(string $id)
