@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\ConvertDateCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -16,6 +17,12 @@ class Testament extends Model
         'is_encrypted',
         'sent_at',
         'status',
+    ];
+
+    protected $casts = [
+        'created_at' => ConvertDateCast::class,
+        'send_at' => ConvertDateCast::class,
+        'sent_at' => ConvertDateCast::class,
     ];
 
     public function images(): HasMany
