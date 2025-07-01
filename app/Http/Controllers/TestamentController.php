@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Actions\StoreTestamentAction;
 use App\Http\Requests\StoreTestamentRequest;
+use App\Http\Requests\UpdateTestamentRequest;
+use App\Models\Testament;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -35,12 +37,16 @@ class TestamentController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(Testament $testament): Response
     {
-        //
+        if ($testament->user_id !== auth()->id()) {
+            abort(403, 'Acesso negado');
+        }
+        
+        return Inertia::render('Testaments/Edit', compact('testament'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateTestamentRequest $request, Testament $testament)
     {
         //
     }
