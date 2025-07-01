@@ -15,12 +15,12 @@ class TestamentController extends Controller
     {
         $user = auth()->user()->getTestamentsByDate();
 
-        return Inertia::render('Testament/Index', compact('user'));
+        return Inertia::render('Testaments/Index', compact('user'));
     }
 
     public function create(): Response
     {
-        return Inertia::render('Testament/Create');
+        return Inertia::render('Testaments/Create');
     }
 
     public function store(StoreTestamentRequest $request, StoreTestamentAction $storeTestamentAction): RedirectResponse
