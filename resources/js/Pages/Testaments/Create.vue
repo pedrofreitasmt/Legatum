@@ -17,7 +17,7 @@ const submit = () => {
 </script>
 
 <template>
-    <AppLayout title="Novo Testamento" class="text-gray-50">
+    <AppLayout title="Novo Testamento">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-50 leading-tight">
                 Novo Testamento Digital
