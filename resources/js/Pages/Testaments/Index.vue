@@ -31,7 +31,7 @@ defineProps({
                     <tr v-for="testament in user.testaments" :key="testament.id">
                         <td class="px-2 py-4 border-b">{{ testament.id }}</td>
                         <td class="px-2 py-4 border-b">{{ testament.title }}</td>
-                        <td class="px-2 py-4 border-b">{{ testament.created_at }}</td>
+                        <td class="px-2 py-4 border-b">{{ testament.created_at }} (UTC-3)</td>
                     </tr>
                 </tbody>
             </table>
