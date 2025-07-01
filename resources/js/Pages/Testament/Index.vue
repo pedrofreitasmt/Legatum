@@ -27,11 +27,11 @@ defineProps({
                         <th class="px-2 py-4">Enviado em</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="border-t">
                     <tr v-for="testament in user.testaments" :key="testament.id">
-                        <td class="px-2 py-4">{{ testament.id }}</td>
-                        <td class="px-2 py-4">{{ testament.title }}</td>
-                        <td class="px-2 py-4">{{ testament.send_at }}</td>
+                        <td class="px-2 py-4 border-b">{{ testament.id }}</td>
+                        <td class="px-2 py-4 border-b">{{ testament.title }}</td>
+                        <td class="px-2 py-4 border-b">{{ testament.send_at }}</td>
                     </tr>
                 </tbody>
             </table>
