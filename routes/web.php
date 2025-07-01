@@ -14,7 +14,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        $user = auth()->user();
+        return Inertia::render('Dashboard', compact('user'));
     })->name('dashboard');
 
     Route::resource('testaments',TestamentController::class);
