@@ -22,9 +22,9 @@ defineProps({
                 </div>
 
                 <div class="flex flex-col items-center gap-4 mt-5">
-                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3 rounded-md font-semibold text-xl"
+                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3 w-[14rem] text-center rounded-md font-semibold text-xl"
                         :href="route('testaments.index')">Meus Testamentos</Link>
-                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3  rounded-md font-semibold text-xl"
+                    <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3 w-[14rem] text-center rounded-md font-semibold text-xl"
                         :href="route('testaments.create')">Criar Testamento</Link>
                 </div>
             </section>
