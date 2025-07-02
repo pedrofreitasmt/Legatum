@@ -19,9 +19,13 @@ class ConvertDateCast implements CastsAttributes
             return null;
         }
 
-        return Carbon::parse($value)
-            ->setTimezone('America/Sao_Paulo')
-            ->format('d/m/Y H:i');
+        $carbon = Carbon::parse($value)->setTimezone('America/Sao_Paulo');
+
+        if (request()->is('*/edit') && $key === 'send_at') {
+            return $carbon->format('Y-m-d');
+        }
+
+        return $carbon->format('d/m/Y H:i');
     }
 
     /**
@@ -35,6 +39,6 @@ class ConvertDateCast implements CastsAttributes
             return null;
         }
 
-        return Carbon::parse($value)->setTimezone('America/Sao_Paulo');
+        return Carbon::parse($value);
     }
 }
