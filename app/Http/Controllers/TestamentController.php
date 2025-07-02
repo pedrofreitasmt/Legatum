@@ -53,8 +53,10 @@ class TestamentController extends Controller
         return redirect()->route('testaments.index', ['page' => $request->query('page')]);
     }
 
-    public function destroy(string $id)
+    public function destroy(Testament $testament): RedirectResponse
     {
-        //
+        $testament->delete();
+
+        return redirect()->route('testaments.index');
     }
 }
