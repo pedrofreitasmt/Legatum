@@ -25,7 +25,7 @@ const submit = () => {
         </template>
 
         <div class="flex justify-center mt-5">
-            <div class="bg-black/50 w-[60rem] rounded-md py-12">
+            <div class="bg-black/50 w-[60rem] rounded-md py-12 text-gray-50">
                 <form @submit.prevent="submit">
                     <div class="flex flex-col items-center gap-6">
                         <div class="flex flex-col gap-1 items-center">
