@@ -29,7 +29,7 @@ class StoreTestamentRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'O título do assunto é obrigatório.',
