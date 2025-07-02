@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use App\Casts\ConvertDateCast;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Testament extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'title',
@@ -22,6 +26,7 @@ class Testament extends Model
 
     protected $casts = [
         'created_at' => ConvertDateCast::class,
+        'updated_at' => ConvertDateCast::class,
         'send_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
     ];
@@ -34,5 +39,13 @@ class Testament extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function paginateTestaments(int $perPage): LengthAwarePaginator
+    {
+        return auth()->user()->testaments()
+            ->orderByDesc('created_at')
+            ->paginate($perPage)
+            ->withQueryString();
     }
 }
