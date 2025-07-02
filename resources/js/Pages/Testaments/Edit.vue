@@ -15,9 +15,18 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('testaments.update', props.testament.id));
+    const queryParams = new URLSearchParams(window.location.search);
+    const page = queryParams.get('page');
+
+    form.put(route('testaments.update', {
+        testament: props.testament.id,
+        page: page
+    }));
 }
 
+const goBack = () => {
+    window.history.back();
+}
 </script>
 
 <template>
@@ -29,9 +38,9 @@ const submit = () => {
         </template>
 
         <div class="flex justify-center mt-5">
-            <div class="bg-black/50 w-[60rem] py-12 rounded-md ">
+            <div class="bg-black/50 w-[60rem] py-12 rounded-md text-gray-50">
                 <form @submit.prevent="submit">
-                    <div class="text-gray-50 flex flex-col items-center gap-6">
+                    <div class="flex flex-col items-center gap-6">
                         <div class="flex flex-col gap-2 items-center">
                             <label class="font-semibold" for="title">Atualizar assunto</label>
                             <input v-model="form.title" placeholder="Digite o assunto"
@@ -60,8 +69,9 @@ const submit = () => {
                             <InputError :message="form.errors.send_at" class="mt-2"></InputError>
                         </div>
                     </div>
-                    <div class="flex justify-center mt-6">
+                    <div class="flex justify-center mt-6 gap-2">
                         <button class="bg-green-500 hover:bg-green-600  text-gray-50 rounded-full font-semibold px-6 py-2 cursor-pointer" type="submit">Atualizar Testamento</button>
+                        <button @click="goBack" type="button" class="bg-yellow-500 hover:bg-yellow-600 text-gray-50 rounded-full font-semibold px-4 py-2 cursor-pointer">Voltar</button>
                     </div>
                 </form>
             </div>
