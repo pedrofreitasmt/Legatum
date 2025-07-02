@@ -15,9 +15,9 @@ class TestamentController extends Controller
 {
     public function index(): Response
     {
-        $user = auth()->user()->getTestamentsByDate();
+        $testaments = Testament::paginateTestaments(5);
 
-        return Inertia::render('Testaments/Index', compact('user'));
+        return Inertia::render('Testaments/Index', compact('testaments'));
     }
 
     public function create(): Response
@@ -42,13 +42,15 @@ class TestamentController extends Controller
         if ($testament->user_id !== auth()->id()) {
             abort(403, 'Acesso negado');
         }
-        
+
         return Inertia::render('Testaments/Edit', compact('testament'));
     }
 
-    public function update(UpdateTestamentRequest $request, Testament $testament)
+    public function update(UpdateTestamentRequest $request, Testament $testament): RedirectResponse
     {
-        //
+        $testament->update($request->validated());
+
+        return redirect()->route('testaments.index', ['page' => $request->query('page')]);
     }
 
     public function destroy(string $id)
