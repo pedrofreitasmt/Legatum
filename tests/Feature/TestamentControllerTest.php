@@ -49,7 +49,6 @@ class TestamentControllerTest extends TestCase
             'title' => 'Meu Testamento',
             'recipient_email' => 'teste@gmail.com',
             'user_id' => $user->id,
-            // Não verificar content se estiver sendo criptografado
         ]);
     }
 }
