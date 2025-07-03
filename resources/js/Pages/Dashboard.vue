@@ -16,7 +16,7 @@ defineProps({
         </template>
 
         <div class="flex justify-center mt-5 text-gray-50">
-            <section class="bg-black/50 w-[40rem] h-96  rounded-md">
+            <section class="bg-black/50 w-[40rem] h-[18rem] rounded-md">
                 <div class="flex justify-center mt-5 font-semibold">
                     <h1 class="text-2xl text-white">Bem-vindo ao Legatum, {{ user.name }}!</h1>
                 </div>
