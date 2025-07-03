@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 const form = useForm({
     title: '',
@@ -55,8 +56,13 @@ const submit = () => {
                                 class="bg-slate-200 text-gray-900 rounded-md p-2 font-semibold">
                             <InputError :message="form.errors.send_at" class="mt-2"></InputError>
                         </div>
-                        <button type="submit"
-                            class="bg-green-500 rounded-full font-semibold px-6 py-2 hover:bg-green-600 cursor-pointer">Criar Testamento</button>
+                        <div class="flex gap-2">
+                            <button type="submit"
+                                class="bg-green-500 rounded-full font-semibold px-6 py-2 hover:bg-green-600 cursor-pointer">Criar
+                                Testamento</button>
+                            <Link :href="route('dashboard')"
+                                class="bg-yellow-500 rounded-full font-semibold px-4 py-2 hover:bg-yellow-600">Voltar</Link>
+                        </div>
                     </div>
                 </form>
             </div>
