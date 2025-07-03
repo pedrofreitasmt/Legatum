@@ -32,9 +32,9 @@ class TestamentController extends Controller
         return redirect()->route('testaments.index');
     }
 
-    public function show(string $id)
+    public function show(Testament $testament): Response
     {
-        //
+        return Inertia::render('Testaments/Show', compact('testament'));
     }
 
     public function edit(Testament $testament): Response
