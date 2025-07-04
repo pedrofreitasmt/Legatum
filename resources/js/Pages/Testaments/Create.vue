@@ -49,13 +49,6 @@ const submit = () => {
                                 placeholder="Digite o email" class="bg-slate-200 text-gray-900 rounded-md w-96 py-2">
                             <InputError :message="form.errors.recipient_email" class="mt-2"></InputError>
                         </div>
-
-                        <div class="flex flex-col gap-1 items-center">
-                            <label class="font-semibold" for="send_at">Data de envio</label>
-                            <input v-model="form.send_at" name="send_at" type="date"
-                                class="bg-slate-200 text-gray-900 rounded-md p-2 font-semibold">
-                            <InputError :message="form.errors.send_at" class="mt-2"></InputError>
-                        </div>
                         <div class="flex gap-2">
                             <button type="submit"
                                 class="bg-green-500 rounded-full font-semibold px-6 py-2 hover:bg-green-600 cursor-pointer">Criar
