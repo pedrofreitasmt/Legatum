@@ -21,11 +21,9 @@ class TestamentFactory extends Factory
             'user_id' => User::find(1),
             'title' => fake()->sentence(3),
             'content' => fake()->paragraph(5),
-            'send_at' => fake()->dateTimeBetween('+1 day', '+1 year'),
             'recipient_email' => fake()->safeEmail(),
             'is_encrypted' => false,
-            'sent_at' => fake()->dateTimeBetween('now', '+1 year'),
-            'status' => 'null',
+            'status' => 'active',
         ];
     }
 }
