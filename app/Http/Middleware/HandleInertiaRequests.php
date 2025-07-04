@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Enums\StatusEnum;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +38,9 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'enums' => [
+                'status' => StatusEnum::toArray(),
+            ],
         ];
     }
 }
