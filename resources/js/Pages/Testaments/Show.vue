@@ -1,12 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Breadcrumb from 'primevue/breadcrumb';
-import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
 
 defineProps({
     testament: Object,
 });
+
+const page = usePage();
 
 const goBack = () => {
     window.history.back();
@@ -22,6 +24,13 @@ const items = ref([
     { label: 'Detalhes do Testamento', icon: 'pi pi-file' }
 ]);
 
+const getStatusLabel = computed(() => {
+    return (statusValue) => {
+        const statusItem = page.props.enums.status.find(s => s.value === statusValue);
+        return statusItem ? statusItem.label : statusValue;
+    };
+});
+
 const breadcrumbStyle = {
     root: {
         class: 'bg-black bg-opacity-80 mt-4 rounded-md'
@@ -33,15 +42,12 @@ const breadcrumbStyle = {
         class: 'text-yellow-500'
     },
 }
-
 </script>
 
 <template>
     <AppLayout title="Detalhes do Testamento">
         <div class="card flex justify-center">
-            <Breadcrumb :home="home" :model="items" class="bg-transparent border-none p-0" :pt="{
-
-            }">
+            <Breadcrumb :home="home" :model="items" class="bg-transparent border-none p-0" :pt="breadcrumbStyle">
                 <template #item="{ item, props }">
                     <div class="flex items-center gap-2">
                         <!-- Renderiza um Link do Inertia se o item tiver URL -->
@@ -75,10 +81,16 @@ const breadcrumbStyle = {
                         <p>{{ testament.content }}</p>
                     </div>
                     <div class="flex justify-center mt-5">
-                        <p><strong>Enviado para:</strong> {{ testament.recipient_email }}</p>
+                        <p><strong>Enviar para:</strong> {{ testament.recipient_email }}</p>
                     </div>
                     <div class="flex justify-center mt-5">
-                        <p><strong>Data de envio:</strong> {{ testament.send_at }}</p>
+                        <p><strong>Status:</strong> {{ getStatusLabel(testament.status) }}</p>
+                    </div>
+                    <div class="flex justify-center mt-5">
+                        <p><strong>Criado em:</strong> {{ testament.created_at }}</p>
+                    </div>
+                    <div class="flex justify-center mt-5">
+                        <p><strong>Última modificação:</strong> {{ testament.updated_at }}</p>
                     </div>
                     <div class="flex justify-center mt-5">
                         <button @click="goBack" type="button"
