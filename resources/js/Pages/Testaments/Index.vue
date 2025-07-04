@@ -44,18 +44,18 @@ const deleteTestament = () => {
             </h2>
         </template>
         <div class="flex justify-center mt-5">
-            <section class="bg-black/50 w-[60rem] py-12 rounded-md">
+            <section class="bg-black/50 w-[80rem] py-12 rounded-md">
                 <div class="flex justify-center mt-5 font-semibold">
                     <h1 class="text-2xl text-white">Meus Testamentos</h1>
                 </div>
                 <div class="flex justify-center mt-5 text-gray-200">
                     <div v-if="testaments.data && testaments.data.length">
-                        <table class="table-auto w-[55rem]">
+                        <table class="table-auto w-[70rem]">
                             <thead>
                                 <tr>
-                                    <th class="px-2 py-4">#</th>
-                                    <th class="px-2 py-4">Título</th>
-                                    <th class="px-2 py-4">Modificado em</th>
+                                    <th class="w-16 px-2 py-4">#</th>
+                                    <th class="w-96 px-2 py-4">Título</th>
+                                    <th class="w-60 px-2 py-4">Modificado em</th>
                                     <th class="px-2 py-4">Ações</th>
                                 </tr>
                             </thead>
