@@ -13,9 +13,9 @@ use Inertia\Response;
 
 class TestamentController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $testaments = Testament::paginateTestaments(5);
+        $testaments = Testament::filterTestaments($request);
 
         return Inertia::render('Testaments/Index', compact('testaments'));
     }
