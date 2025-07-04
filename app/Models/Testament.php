@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Casts\ConvertDateCast;
+use Illuminate\Database\Console\Migrations\StatusCommand;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 
 class Testament extends Model
 {
@@ -39,11 +42,16 @@ class Testament extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function paginateTestaments(int $perPage): LengthAwarePaginator
+    public function scopeFilterTestaments(Builder $query, Request $request): LengthAwarePaginator
     {
-        return auth()->user()->testaments()
-            ->orderByDesc('created_at')
-            ->paginate($perPage)
+        $query = auth()->user()->testaments();
+
+        $query->when($request->filled('title'), function ($q) use ($request) {
+            $q->where('title', 'like', "%{$request->title}%");
+        });
+
+        return $query->orderByDesc('created_at')
+            ->paginate(5)
             ->withQueryString();
     }
 }
