@@ -10,6 +10,10 @@ defineProps({
 });
 const form = useForm({});
 
+const searchForm = useForm({
+    title: '',
+});
+
 const selectedTestament = ref(null);
 
 const showModal = ref(false);
@@ -34,6 +38,13 @@ const deleteTestament = () => {
         });
     }
 };
+
+const submit = () => {
+    searchForm.get(route('testaments.index', { title: searchForm.title }), {
+        preserveState: true,
+        replace: true,
+    });
+}
 </script>
 
 <template>
@@ -43,7 +54,21 @@ const deleteTestament = () => {
                 Testamentos
             </h2>
         </template>
-        <div class="flex justify-center mt-5">
+        <div class="flex flex-col items-center mt-5 gap-4">
+            <section>
+                <div class="bg-black/50 rounded-md py-5">
+                    <div class="w-[30rem] py-2 rounded-md gap-2">
+                        <form @submit.prevent="submit">
+                            <div class="flex flex-col items-center gap-2 ">
+                                <label class="text-gray-50 font-semibold" for="title">Pesquisar testamento por título</label>
+                                <input v-model="searchForm.title" class="rounded-md" name="title" type="text">
+                                <button class="bg-green-500 hover:bg-green-600 text-gray-50 py-2 px-4 rounded-full font-semibold" type="submit">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
             <section class="bg-black/50 w-[80rem] py-12 rounded-md">
                 <div class="flex justify-center mt-5 font-semibold">
                     <h1 class="text-2xl text-white">Meus Testamentos</h1>
@@ -105,18 +130,20 @@ const deleteTestament = () => {
             </template>
             <template #footer>
                 <div class="flex justify-end space-x-3">
-                    <button @click="closeModal"
-                        :disabled="form.processing"
+                    <button @click="closeModal" :disabled="form.processing"
                         class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 font-semibold">
                         Cancelar
                     </button>
 
-                    <button @click="deleteTestament"
-                        :disabled="form.processing"
+                    <button @click="deleteTestament" :disabled="form.processing"
                         class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:bg-red-400 flex items-center">
-                        <svg v-if="form.processing" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg v-if="form.processing" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none"
+                            viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
                         </svg>
                         <span v-if="form.processing">Excluindo...</span>
                         <span v-else class="font-semibold">Excluir</span>
