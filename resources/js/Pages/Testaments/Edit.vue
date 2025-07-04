@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
+import Breadcrumb from '@/Components/Breadcrumb.vue';
 
 const props = defineProps({
     testament: Object,
@@ -26,10 +27,18 @@ const submit = () => {
 const goBack = () => {
     window.history.back();
 }
+
+const breadcrumbItems = [
+    { label: 'Dashboard', href: route('dashboard') },
+    { label: 'Meus Testamentos', href: route('testaments.index') },
+    { label: 'Editar Testamento' }
+];
 </script>
 
 <template>
     <AppLayout title="Editar Testamento">
+        <Breadcrumb :items="breadcrumbItems"></Breadcrumb>
+
         <template #header>
             <h2 class="font-semibold text-xl text-gray-50 leading-tight">
                 Editar Testamento
