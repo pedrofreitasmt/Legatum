@@ -25,7 +25,6 @@ class UpdateTestamentRequest extends FormRequest
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:10000'],
             'recipient_email' => ['required', 'email'],
-            'send_at' => ['required', 'date', 'after:today'],
         ];
     }
 
@@ -38,9 +37,6 @@ class UpdateTestamentRequest extends FormRequest
             'content.max' => 'O conteúdo do assunto deve ter no máximo 10000 caracteres.',
             'recipient_email.required' => 'O email do destinatário é obrigatório.',
             'recipient_email.email' => 'O email do destinatário deve ser um email válido.',
-            'send_at.required' => 'A data de envio é obrigatória.',
-            'send_at.date' => 'A data de envio deve ser uma data válida.',
-            'send_at.after' => 'A data de envio deve ser posterior ao dia de hoje.'
         ];
     }
 }
