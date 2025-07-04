@@ -17,7 +17,6 @@ class Testament extends Model
         'user_id',
         'title',
         'content',
-        'send_at',
         'recipient_email',
         'is_encrypted',
         'sent_at',
@@ -27,7 +26,6 @@ class Testament extends Model
     protected $casts = [
         'created_at' => ConvertDateCast::class,
         'updated_at' => ConvertDateCast::class,
-        'send_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
     ];
 
