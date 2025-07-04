@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->longText('content');
-            $table->dateTime('send_at');
             $table->string('recipient_email');
             $table->boolean('is_encrypted')->default(true);
             $table->dateTime('sent_at')->nullable();
