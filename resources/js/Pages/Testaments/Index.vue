@@ -39,10 +39,13 @@ const deleteTestament = () => {
     }
 };
 
-const submit = () => {
+const filterTestaments = () => {
     searchForm.get(route('testaments.index', { title: searchForm.title }), {
         preserveState: true,
         replace: true,
+        onSuccess: () => {
+            searchForm.title = '';
+        },
     });
 }
 </script>
@@ -58,10 +61,10 @@ const submit = () => {
             <section>
                 <div class="bg-black/50 rounded-md py-5">
                     <div class="w-[30rem] py-2 rounded-md gap-2">
-                        <form @submit.prevent="submit">
+                        <form @submit.prevent="filterTestaments">
                             <div class="flex flex-col items-center gap-2 ">
                                 <label class="text-gray-50 font-semibold" for="title">Pesquisar testamento por título</label>
-                                <input v-model="searchForm.title" class="rounded-md" name="title" type="text">
+                                <input placeholder="Digite o título" v-model="searchForm.title" class="rounded-md" name="title" type="text">
                                 <button class="bg-green-500 hover:bg-green-600 text-gray-50 py-2 px-4 rounded-full font-semibold" type="submit">Buscar</button>
                             </div>
                         </form>
