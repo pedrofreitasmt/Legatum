@@ -15,7 +15,11 @@ class TestamentController extends Controller
 {
     public function index(Request $request): Response
     {
-        $testaments = Testament::filterTestaments($request);
+        $testaments = Testament::query()->filterTestaments($request)
+            ->with('testamentAttachments')
+            ->orderBy('id')
+            ->paginate(5)
+            ->withQueryString();
 
         return Inertia::render('Testaments/Index', compact('testaments'));
     }
@@ -42,6 +46,8 @@ class TestamentController extends Controller
         if ($testament->user_id !== auth()->id()) {
             abort(403, 'Acesso negado');
         }
+
+        $testament->load('testamentAttachments');
 
         return Inertia::render('Testaments/Edit', compact('testament'));
     }
