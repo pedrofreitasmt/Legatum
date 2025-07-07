@@ -50,7 +50,7 @@ class Testament extends Model
             $q->where('title', 'like', "%{$request->title}%");
         });
 
-        return $query->orderByDesc('created_at')
+        return $query->orderBy('id')
             ->paginate(5)
             ->withQueryString();
     }
