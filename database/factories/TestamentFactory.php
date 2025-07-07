@@ -23,7 +23,7 @@ class TestamentFactory extends Factory
             'content' => fake()->paragraph(5),
             'recipient_email' => fake()->safeEmail(),
             'is_encrypted' => false,
-            'status' => 'active',
+            'status' => true,
         ];
     }
 }
