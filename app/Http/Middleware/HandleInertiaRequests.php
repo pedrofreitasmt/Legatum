@@ -38,9 +38,6 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'enums' => [
-                'status' => StatusEnum::toArray(),
-            ],
         ];
     }
 }
