@@ -28,6 +28,7 @@ class Testament extends Model
         'created_at' => ConvertDateCast::class,
         'updated_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
+        'status' => 'boolean',
     ];
 
     public function testamentAttachments(): HasMany
