@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('recipient_email');
             $table->boolean('is_encrypted')->default(true);
             $table->dateTime('sent_at')->nullable();
-            $table->string('status')->default('scheduled');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
