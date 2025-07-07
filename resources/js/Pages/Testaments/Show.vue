@@ -1,25 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 
 defineProps({
     testament: Object,
 });
 
-const page = usePage();
-
 const goBack = () => {
     window.history.back();
 };
-
-const getStatusLabel = computed(() => {
-    return (statusValue) => {
-        const statusItem = page.props.enums.status.find(s => s.value === statusValue);
-        return statusItem ? statusItem.label : statusValue;
-    };
-});
 
 const breadcrumbItems = [
     { label: 'Dashboard', href: route('dashboard') },
@@ -50,7 +39,7 @@ const breadcrumbItems = [
                         <p><strong>Enviar para:</strong> {{ testament.recipient_email }}</p>
                     </div>
                     <div class="flex justify-center mt-5">
-                        <p><strong>Status:</strong> {{ getStatusLabel(testament.status) }}</p>
+                        <p><strong>Status:</strong> {{ testament.status ? 'Ativo' : null }}</p>
                     </div>
                     <div class="flex justify-center mt-5">
                         <p><strong>Criado em:</strong> {{ testament.created_at }}</p>
