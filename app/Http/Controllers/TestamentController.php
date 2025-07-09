@@ -17,7 +17,7 @@ class TestamentController extends Controller
     {
         $testaments = Testament::query()->filterTestaments($request)
             ->with('testamentAttachments')
-            ->orderBy('id')
+            ->orderByDesc('id')
             ->paginate(5)
             ->withQueryString();
 
