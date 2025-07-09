@@ -88,8 +88,8 @@ const filterTestaments = () => {
                                 </tr>
                             </thead>
                             <tbody class="border-t">
-                                <tr v-for="testament in testaments.data" :key="testament.id">
-                                    <td class="px-2 py-4 border-b text-center">{{ testament.id }}</td>
+                                <tr v-for="(testament, index) in testaments.data" :key="testament.id">
+                                    <td class="px-2 py-4 border-b text-center">{{ testaments.from + index }}</td>
                                     <td class="px-2 py-4 border-b text-center">{{ testament.title }}</td>
                                     <td class="px-2 py-4 border-b text-center">{{ testament.updated_at }} (UTC-3)</td>
                                     <td class="px-2 py-4 border-b space-x-2 text-center">
