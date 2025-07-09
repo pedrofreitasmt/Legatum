@@ -48,7 +48,7 @@ const breadcrumbItems = [
         <div class="flex justify-center mt-5">
             <div class="bg-black/50 w-[60rem] py-12 rounded-md text-gray-50">
                 <form @submit.prevent="submit">
-                    <div class="flex flex-col items-center gap-6">
+                    <div class="grid grid-cols-1 items-center gap-6">
                         <div class="flex flex-col gap-2 items-center">
                             <label class="font-semibold" for="title">Atualizar assunto</label>
                             <input v-model="form.title" placeholder="Digite o assunto"
