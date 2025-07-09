@@ -26,34 +26,68 @@ const breadcrumbItems = [
                 Detalhes do Testamento
             </h2>
         </template>
-        <div class="flex justify-center mt-5">
-            <div class="bg-black/50 w-[60rem] py-12 rounded-md">
-                <section class="px-16 text-gray-50">
-                    <div class="flex justify-center mt-5 font-semibold">
-                        <h1 class="text-2xl">{{ testament.title }}</h1>
+        <div class="flex justify-center mt-8">
+            <div class="bg-black/50 w-full max-w-4xl rounded-lg shadow-lg text-gray-200">
+                <div class="p-8">
+                    <!-- Título -->
+                    <div class="text-center mb-6">
+                        <h1 class="text-3xl font-bold text-gray-50">{{ testament.title }}</h1>
                     </div>
-                    <div class="flex justify-center mt-5">
-                        <p>{{ testament.content }}</p>
+
+                    <!-- Divisor -->
+                    <hr class="border-gray-600 mb-6">
+
+                    <!-- Conteúdo Principal -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-semibold text-gray-50 mb-2">Conteúdo do Testamento</h2>
+                        <p class="text-gray-300 whitespace-pre-wrap break-words bg-black/20 p-4 rounded-md">{{ testament.content }}</p>
                     </div>
-                    <div class="flex justify-center mt-5">
-                        <p><strong>Enviar para:</strong> {{ testament.recipient_email }}</p>
+
+                    <!-- Grid de Metadados -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8">
+                        <div>
+                            <p class="text-md font-semibold text-gray-50">Enviar Para</p>
+                            <p class="text-lg">{{ testament.recipient_email }}</p>
+                        </div>
+                        <div>
+                            <p class="text-md font-semibold text-gray-50">Status</p>
+                            <p class="text-lg">
+                                <span :class="testament.status ? 'font-semibold text-green-400' : 'font-semibold text-yellow-400'">
+                                    {{ testament.status ? 'Ativo' : 'Inativo' }}
+                                </span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-md font-semibold text-gray-50">Criado Em</p>
+                            <p class="text-lg">{{ testament.created_at }}</p>
+                        </div>
+                        <div>
+                            <p class="text-md font-semibold text-gray-50">Última Modificação</p>
+                            <p class="text-lg">{{ testament.updated_at }}</p>
+                        </div>
                     </div>
-                    <div class="flex justify-center mt-5">
-                        <p><strong>Status:</strong> {{ testament.status ? 'Ativo' : null }}</p>
+
+                    <!-- Seção de Anexos -->
+                    <div v-if="testament.testament_attachments && testament.testament_attachments.length > 0">
+                        <hr class="border-gray-600 mb-6">
+                        <h2 class="text-lg font-semibold text-gray-300 mb-2">Anexos</h2>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li v-for="attachment in testament.testament_attachments" :key="attachment.id">
+                                <a :href="`/storage/${attachment.path}`" target="_blank" class="text-blue-400 hover:underline">
+                                    {{ attachment.original_name }}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="flex justify-center mt-5">
-                        <p><strong>Criado em:</strong> {{ testament.created_at }}</p>
-                    </div>
-                    <div class="flex justify-center mt-5">
-                        <p><strong>Última modificação:</strong> {{ testament.updated_at }}</p>
-                    </div>
-                    <div class="flex justify-center mt-5">
-                        <button @click="goBack" type="button"
-                            class="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-md">
-                            Voltar
-                        </button>
-                    </div>
-                </section>
+                </div>
+
+                <!-- Rodapé com Botão de Voltar -->
+                <div class="bg-black/20 px-8 py-4 rounded-b-lg flex justify-end">
+                    <button @click="goBack" type="button"
+                        class="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-md">
+                        Voltar
+                    </button>
+                </div>
             </div>
         </div>
     </AppLayout>
