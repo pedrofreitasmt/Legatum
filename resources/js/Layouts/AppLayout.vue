@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import { usePermissions } from '@/Composables/usePermissions';
 
 defineProps({
     title: String,
@@ -25,6 +26,8 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'));
 };
+
+const { can } = usePermissions();
 </script>
 
 <template>
@@ -56,6 +59,12 @@ const logout = () => {
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink class="text-white" :href="route('profile.show')" :active="route().current('profile.show')">
                                     Meu Perfil
+                                </NavLink>
+                            </div>
+
+                            <div v-if="can('viewAdminPanel')" class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink class="text-white" :href="route('users.index')" :active="route().current('profile.show')">
+                                    Usuários
                                 </NavLink>
                             </div>
                         </div>
