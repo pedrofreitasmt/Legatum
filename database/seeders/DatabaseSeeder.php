@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Testament;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdmUserSeeder::class,
         ]);
+
+        User::factory(10)->create();
 
         Testament::factory(15)->create();
     }
