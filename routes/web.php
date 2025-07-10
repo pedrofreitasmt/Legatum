@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TestamentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,5 +19,10 @@ Route::middleware([
         return Inertia::render('Dashboard', compact('user'));
     })->name('dashboard');
 
-    Route::resource('testaments',TestamentController::class);
+    Route::resource('testaments', TestamentController::class);
+
+    // Route::middleware('')->group(function () {
+        Route::resource('users', UserController::class)->only(['index', 'show']);
+
+    // });
 });
