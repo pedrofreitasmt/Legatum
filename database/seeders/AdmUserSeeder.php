@@ -20,6 +20,7 @@ class AdmUserSeeder extends Seeder
             'phone' => fake()->phoneNumber(),
             'cpf' => fake()->cpf(false),
             'password' => Hash::make('123456'),
+            'is_admin' => true,
         ]);
     }
 }
