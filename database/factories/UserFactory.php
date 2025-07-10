@@ -33,6 +33,7 @@ class UserFactory extends Factory
             'cpf' => fake()->cpf(false),
             'phone' => fake()->phoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
+            'is_admin' => false,
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
