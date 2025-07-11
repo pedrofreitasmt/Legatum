@@ -21,8 +21,7 @@ Route::middleware([
 
     Route::resource('testaments', TestamentController::class);
 
-    // Route::middleware('')->group(function () {
+    Route::middleware('is_admin')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'show']);
-
-    // });
+    });
 });
