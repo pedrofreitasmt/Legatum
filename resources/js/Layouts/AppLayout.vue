@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { ref, onMounted, onUnmounted } from 'vue';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -8,6 +8,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { usePermissions } from '@/Composables/usePermissions';
+import { useToast } from 'vue-toastification';
 
 defineProps({
     title: String,
@@ -28,6 +29,28 @@ const logout = () => {
 };
 
 const { can } = usePermissions();
+
+const toast = useToast();
+
+let removeFinishListener = null;
+
+onMounted(() => {
+    removeFinishListener = router.on('finish', () => {
+        const flash = usePage().props.flash;
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+    });
+});
+
+onUnmounted(() => {
+    if (removeFinishListener) {
+        removeFinishListener();
+    }
+});
 </script>
 
 <template>
