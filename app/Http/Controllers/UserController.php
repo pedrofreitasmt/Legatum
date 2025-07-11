@@ -11,11 +11,9 @@ class UserController extends Controller
 {
     public function index(): Response
     {
-        if (!auth()->user()->is_admin) {
-            abort(403, 'Acesso negado');
-        }
+        $users = User::paginate(5);
 
-        return Inertia::render('Users/Index');
+        return Inertia::render('Users/Index', compact('users'));
     }
 
     public function create()
@@ -30,10 +28,6 @@ class UserController extends Controller
 
     public function show(User $user): Response
     {
-        if (!auth()->user()->is_admin) {
-            abort(403, 'Acesso negado');
-        }
-
         return Inertia::render('Users/Show', compact('user'));
     }
 
