@@ -33,7 +33,7 @@ class TestamentController extends Controller
     {
         $storeTestamentAction->run($request);
 
-        return redirect()->route('testaments.index');
+        return redirect()->route('testaments.index')->withSuccess('Testamento criado com sucesso!');
     }
 
     public function show(Testament $testament): Response
@@ -56,13 +56,13 @@ class TestamentController extends Controller
     {
         $testament->update($request->validated());
 
-        return redirect()->route('testaments.index', ['page' => $request->query('page')]);
+        return redirect()->route('testaments.index', ['page' => $request->query('page')])->withSuccess('Testamento atualizado com sucesso!');
     }
 
     public function destroy(Testament $testament): RedirectResponse
     {
         $testament->delete();
 
-        return redirect()->route('testaments.index');
+        return redirect()->route('testaments.index')->withSuccess('Testamento excluído com sucesso!');
     }
 }
