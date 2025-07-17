@@ -25,6 +25,7 @@ defineProps({
 
                 <div class="flex justify-center">
                     <div v-if="users.data && users.data.length">
+                        <hr class="m-5 border-gray-600">
                         <table class="table-auto w-[70rem]">
                         <thead>
                             <tr>
