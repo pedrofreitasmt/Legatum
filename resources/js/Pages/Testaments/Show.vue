@@ -84,7 +84,7 @@ const breadcrumbItems = [
                 <!-- Rodapé com Botão de Voltar -->
                 <div class="bg-black/20 px-8 py-4 rounded-b-lg flex justify-end">
                     <button @click="goBack" type="button"
-                        class="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded-md">
+                        class="bg-yellow-500 hover:bg-yellow-600 font-semibold py-2 px-4 rounded-full">
                         Voltar
                     </button>
                 </div>
