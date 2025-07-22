@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Http\Requests\StoreTestamentRequest;
-use App\Models\Testament;
 use Illuminate\Support\Arr;
 
 
@@ -13,13 +12,9 @@ class StoreTestamentAction
     {
         $validatedData = $request->validated();
 
-        $encryptedContent = encrypt($validatedData['content']);
+        $validatedData['content'] = encrypt($validatedData['content']);
 
-        $validatedData['content'] = $encryptedContent;
-
-        $validatedData['user_id'] = auth()->id();
-
-        $testament = Testament::create(Arr::except($validatedData, ['attachments']));
+        $testament = auth()->user()->testaments()->create(Arr::except($validatedData, ['attachments']));
 
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
