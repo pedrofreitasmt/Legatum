@@ -25,7 +25,7 @@ class StoreTestamentRequest extends FormRequest
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:10000'],
             'recipient_email' => ['required', 'email'],
-            'attachments' => ['nullable','array'],
+            'attachments' => ['nullable','array', 'max:2'],
             'attachments.*' => ['required','file', 'mimes:pdf,png,jpg', 'max:5120'],
         ];
     }
@@ -39,6 +39,7 @@ class StoreTestamentRequest extends FormRequest
             'content.max' => 'O conteúdo do assunto deve ter no máximo 10000 caracteres.',
             'recipient_email.required' => 'O email do destinatário é obrigatório.',
             'recipient_email.email' => 'O email do destinatário deve ser um email válido.',
+            'attachments.max' => 'Você pode enviar no máximo 2 anexos.',
             'attachments.*.required' => 'É necessário enviar pelo menos um arquivo de anexo.',
             'attachments.*.file' => 'Houve um erro ao carregar o arquivo. Verifique se o arquivo não está corrompido.',
             'attachments.*.mimes' => 'O arquivo de anexo deve ser do tipo: pdf, png ou jpg.',
