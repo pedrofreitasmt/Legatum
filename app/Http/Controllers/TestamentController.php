@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\StoreTestamentAction;
+use App\Actions\UpdateTestamentAction;
 use App\Http\Requests\StoreTestamentRequest;
 use App\Http\Requests\UpdateTestamentRequest;
 use App\Models\Testament;
@@ -52,9 +53,9 @@ class TestamentController extends Controller
         return Inertia::render('Testaments/Edit', compact('testament'));
     }
 
-    public function update(UpdateTestamentRequest $request, Testament $testament): RedirectResponse
+    public function update(UpdateTestamentRequest $request, UpdateTestamentAction $updateTestamentAction, Testament $testament): RedirectResponse
     {
-        $testament->update($request->validated());
+        $updateTestamentAction->run($request, $testament);
 
         return redirect()->route('testaments.index', ['page' => $request->query('page')])->withSuccess('Testamento atualizado com sucesso!');
     }
