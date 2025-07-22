@@ -132,10 +132,10 @@ const breadcrumbItems = [
                                             class="flex justify-between items-center">
                                             <div class="flex items-center gap-2">
                                                 <a :href="`/storage/${attachment.path}`" target="_blank"
-                                                   class="text-blue-400 hover:underline">
+                                                   class="text-blue-400 truncate hover:underline">
                                                     {{ attachment.original_name }}
                                                 </a>
-                                                <span class="text-xs text-gray-500">
+                                                <span class="text-xs truncate text-gray-500">
                                                     ({{ (attachment.size / 1024).toFixed(1) }} KB)
                                                 </span>
                                             </div>
