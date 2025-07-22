@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\ConvertDateCast;
+use App\Casts\DecryptContentCast;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,7 @@ class Testament extends Model
         'updated_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
         'status' => 'boolean',
+        'content' => DecryptContentCast::class,
     ];
 
     public function testamentAttachments(): HasMany
@@ -46,7 +48,7 @@ class Testament extends Model
         $query->where('user_id', auth()->id());
 
         $query->when($request->filled('title'), function ($q) use ($request) {
-            $q->where('title', 'like', "%{$request->title}%");
+            $q->where('title', 'like', "%{$request->input('title')}%");
         });
 
         return $query;
