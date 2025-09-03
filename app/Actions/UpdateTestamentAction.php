@@ -7,6 +7,7 @@ use App\Models\Testament;
 use App\Models\TestamentAttachment;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class UpdateTestamentAction
 {
@@ -45,6 +46,9 @@ class UpdateTestamentAction
 
     /**
      * Salva os novos arquivos de anexo.
+     *
+     * @param Testament $testament
+     * @param UploadedFile[] $files
      */
     private function storeNewAttachments(Testament $testament, array $files): void
     {
