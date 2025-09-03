@@ -3,8 +3,8 @@
 namespace App\Actions;
 
 use App\Http\Requests\StoreTestamentRequest;
+use App\Models\Testament;
 use Illuminate\Support\Arr;
-
 
 class StoreTestamentAction
 {
@@ -12,21 +12,26 @@ class StoreTestamentAction
     {
         $validatedData = $request->validated();
 
-        $validatedData['content'] = encrypt($validatedData['content']);
+        encrypt($validatedData['content']);
 
         $testament = auth()->user()->testaments()->create(Arr::except($validatedData, ['attachments']));
 
         if ($request->hasFile('attachments')) {
-            foreach ($request->file('attachments') as $file) {
-                $path = $file->store('attachments', 'public');
+            $this->storeAttachments($testament, $request);
+        }
+    }
 
-                $testament->testamentAttachments()->create([
-                    'path' => $path,
-                    'original_name' => $file->getClientOriginalName(),
-                    'mime_type' => $file->getClientMimeType(),
-                    'size' => $file->getSize(),
-                ]);
-            }
+    private function storeAttachments(Testament $testament, StoreTestamentRequest $request): void
+    {
+        foreach ($request->file('attachments') as $file) {
+            $path = $file->store('attachments', 'public');
+
+            $testament->testamentAttachments()->create([
+                'path' => $path,
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getClientMimeType(),
+                'size' => $file->getSize(),
+            ]);
         }
     }
 }
