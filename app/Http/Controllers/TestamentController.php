@@ -7,6 +7,7 @@ use App\Actions\UpdateTestamentAction;
 use App\Http\Requests\StoreTestamentRequest;
 use App\Http\Requests\UpdateTestamentRequest;
 use App\Models\Testament;
+use App\Services\TestamentService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,13 +15,13 @@ use Inertia\Response;
 
 class TestamentController extends Controller
 {
+    public function __construct(private TestamentService $testamentService)
+    {
+    }
+
     public function index(Request $request): Response
     {
-        $testaments = Testament::query()->filterTestaments($request)
-            ->with('testamentAttachments')
-            ->orderByDesc('id')
-            ->paginate(5)
-            ->withQueryString();
+        $testaments = $this->testamentService->displayTestaments($request);
 
         return Inertia::render('Testaments/Index', compact('testaments'));
     }
