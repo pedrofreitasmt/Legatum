@@ -2,24 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Testament;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call([
-            AdmUserSeeder::class,
+            UserSeeder::class,
+            TestamentSeeder::class,
         ]);
-
-        User::factory(10)->create();
-
-        Testament::factory(15)->create();
     }
 }
