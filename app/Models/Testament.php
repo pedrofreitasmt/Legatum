@@ -4,12 +4,10 @@ namespace App\Models;
 
 use App\Casts\ConvertDateCast;
 use App\Casts\DecryptContentCast;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Http\Request;
 
 class Testament extends Model
 {
@@ -29,7 +27,6 @@ class Testament extends Model
         'created_at' => ConvertDateCast::class,
         'updated_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
-        'status' => 'boolean',
         'content' => DecryptContentCast::class,
     ];
 
@@ -41,16 +38,5 @@ class Testament extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function scopeFilterTestaments(Builder $query, Request $request): Builder
-    {
-        $query->where('user_id', auth()->id());
-
-        $query->when($request->filled('title'), function ($q) use ($request) {
-            $q->where('title', 'like', "%{$request->input('title')}%");
-        });
-
-        return $query;
     }
 }
