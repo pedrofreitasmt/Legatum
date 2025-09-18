@@ -43,7 +43,8 @@ class HandleInertiaRequests extends Middleware
 
                 'can' => auth()->user() ? [
                     'viewAdminPanel' => $request->user()->can('viewAdminPanel'),
-                ] : [],
+                    ] : [],
+                'permissions' => auth()->user() ? auth()->user()->getAllPermissions()->pluck('name') : [],
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
