@@ -9,8 +9,15 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->admin()->create()->assignRole('Super Admin');
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@teste.com',
+            'password' => bcrypt('123456'),
+            'cpf' => '12345678901',
+            'phone' => '11999999999',
+            'email_verified_at' => now(),
+        ])->assignRole('Super Admin');
 
-        User::factory(10)->create();
+        User::factory(5)->create();
     }
 }
