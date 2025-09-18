@@ -11,8 +11,6 @@ use Laravel\Jetstream\Features;
 
 class UserFactory extends Factory
 {
-    protected static ?string $password;
-
     public function definition(): array
     {
         return [
@@ -21,7 +19,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'cpf' => fake()->cpf(false),
             'phone' => fake()->phoneNumber(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('123456'),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
@@ -59,16 +57,5 @@ class UserFactory extends Factory
                 ->when(is_callable($callback), $callback),
             'ownedTeams'
         );
-    }
-
-    public function admin(): static
-    {
-        return $this->state(fn(array $attributes) => [
-            'name' => 'Admin',
-            'email' => 'admin@teste.com',
-            'password' => bcrypt('123456'),
-            'cpf' => '67831466690',
-            'phone' => fake()->phoneNumber(),
-        ]);
     }
 }
