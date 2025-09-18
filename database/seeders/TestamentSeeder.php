@@ -9,6 +9,6 @@ class TestamentSeeder extends Seeder
 {
     public function run(): void
     {
-        Testament::factory(10)->create();
+        Testament::factory(30)->create();
     }
 }
