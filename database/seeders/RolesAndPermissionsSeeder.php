@@ -23,8 +23,8 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
 
         $permissions = [
-           'usuario',
-           'testamento'
+            'usuario',
+            'testamento'
         ];
 
         $arrayOfPermissionNames = ['default'];
@@ -55,10 +55,14 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $roles = Role::pluck('name');
 
-        if ($roles->contains('Super Admin')) {
-            return;
+        if (!$roles->contains('Super Admin')) {
+            Role::create(['name' => 'Super Admin']);
         }
 
-        Role::create(['name' => 'Super Admin']);
+        // Garantir que o Super Admin sempre tenha todas as permissões
+        $superAdmin = Role::where('name', 'Super Admin')->first();
+        $superAdmin->syncPermissions(Permission::all());
+
+        echo "Papel 'Super Admin' criado/atualizado com todas as permissões.\n";
     }
 }
