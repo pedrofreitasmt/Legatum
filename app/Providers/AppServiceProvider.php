@@ -23,10 +23,6 @@ class AppServiceProvider extends ServiceProvider
 
         Model::automaticallyEagerLoadRelationships();
 
-        Gate::define('viewAdminPanel', function ($user) {
-            return $user->is_admin;
-        });
-
         $this->configureCommands();
         $this->configureModels();
         $this->configureVite();
