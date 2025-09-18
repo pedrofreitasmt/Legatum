@@ -23,7 +23,8 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
 
         $permissions = [
-           //
+           'usuario',
+           'testamento'
         ];
 
         $arrayOfPermissionNames = ['default'];
