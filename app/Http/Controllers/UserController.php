@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\UserService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class UserController extends Controller
 {
-    public function index(): Response
+    public function __construct(private UserService $userService)
+    {
+    }
+
+    public function index(Request $request): Response
     {
         $this->authorize('usuario listar');
 
-        $users = User::paginate(5);
+        $users = $this->userService->displayUsers($request);
 
         return Inertia::render('Users/Index', compact('users'));
     }
