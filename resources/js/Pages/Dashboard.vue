@@ -1,9 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import { useSpatiePermissions } from '@/Composables/useSpatiePermissions.js';
+
+const { hasPermission } = useSpatiePermissions();
 
 defineProps({
     user: Object,
+    userCount: Object,
+    testamentCount: Object,
 });
 </script>
 
@@ -15,7 +20,7 @@ defineProps({
             </h2>
         </template>
 
-        <div class="flex justify-center mt-5 text-gray-50">
+        <div class="flex justify-center mt-5 text-gray-50 gap-5">
             <section class="bg-black/50 w-[40rem] h-[18rem] rounded-md">
                 <div class="flex justify-center mt-5 font-semibold">
                     <h1 class="text-2xl text-white">Bem-vindo ao Legatum, {{ user.name }}!</h1>
@@ -26,6 +31,18 @@ defineProps({
                         :href="route('testaments.index')">Meus Testamentos</Link>
                     <Link class="bg-slate-500 hover:bg-slate-600 cursor-pointer px-6 py-3 w-[14rem] text-center rounded-md font-semibold text-xl"
                         :href="route('testaments.create')">Criar Testamento</Link>
+                </div>
+            </section>
+
+            <section v-if="hasPermission('usuario detalhar')" class="bg-black/50 w-[40rem] h-[18rem] rounded-md">
+                <div class="flex justify-center mt-5 font-semibold">
+                    <h1 class="text-2xl text-white">Informações do Sistema</h1>
+                </div>
+
+                <div class="flex flex-col items-center gap-4 mt-5">
+                    <p class="text-lg">Usuários Ativos: {{ userCount }}</p>
+                    <p class="text-lg">Testamentos Ativos do Sistema: {{ testamentCount }}</p>
+                    <p class="text-lg">Suporte: suporte@legatum.com</p>
                 </div>
             </section>
         </div>
