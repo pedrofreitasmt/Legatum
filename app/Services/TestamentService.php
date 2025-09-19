@@ -14,7 +14,7 @@ class TestamentService extends Service
 
     public function displayTestaments(Request $request): LengthAwarePaginator
     {
-        $query = $this->testament->newQuery()->with('testamentAttachments');
+        $query = $this->testament->newQuery()->where('user_id', auth()->id())->with(['user', 'testamentAttachments']);
 
         $this->filter($query, $request);
 
