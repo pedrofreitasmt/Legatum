@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content');
             $table->string('recipient_email');
-            $table->boolean('is_encrypted')->default(true);
             $table->dateTime('sent_at')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
