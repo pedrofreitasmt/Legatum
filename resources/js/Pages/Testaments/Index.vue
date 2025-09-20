@@ -60,12 +60,12 @@ const filterTestaments = () => {
         <div class="flex flex-col items-center mt-5 gap-4">
             <section>
                 <div class="bg-black/50 rounded-md py-5">
-                    <div class="w-[30rem] py-2 rounded-md gap-2">
+                    <div class="w-[80rem] py-2 rounded-md gap-2">
                         <form @submit.prevent="filterTestaments">
                             <div class="flex flex-col items-center gap-2 ">
-                                <label class="text-gray-50 font-semibold" for="title">Pesquisar testamento por
-                                    título</label>
-                                <input placeholder="Digite o título" v-model="searchForm.title" class="rounded-md"
+                                <label class="text-gray-50 font-semibold" for="title">
+                                    Título</label>
+                                <input placeholder="Digite o título" v-model="searchForm.title" class="rounded-md w-[40rem]"
                                     name="title" type="text">
                                 <button
                                     class="bg-green-500 hover:bg-green-600 text-gray-50 py-2 px-4 rounded-full font-semibold"
