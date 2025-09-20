@@ -15,10 +15,6 @@ class UpdateTestamentAction
     {
         $validatedData = $request->validated();
 
-        if (isset($validatedData['content'])) {
-            $validatedData['content'] = encrypt($validatedData['content']);
-        }
-
         if (!empty($validatedData['attachments_to_delete'])) {
             $this->deleteMarkedAttachments($validatedData['attachments_to_delete']);
         }

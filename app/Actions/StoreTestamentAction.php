@@ -12,8 +12,6 @@ class StoreTestamentAction
     {
         $validatedData = $request->validated();
 
-        encrypt($validatedData['content']);
-
         $testament = auth()->user()->testaments()->create(Arr::except($validatedData, ['attachments']));
 
         if ($request->hasFile('attachments')) {
