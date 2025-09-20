@@ -37,6 +37,45 @@ class UserControllerTest extends TestCase
     }
 
     /**
+     * Testa se a filtragem por nome funciona corretamente.
+     */
+    public function test_filtra_usuarios_por_nome(): void
+    {
+        $usuario1 = User::factory()->create(['name' => 'João Silva']);
+        $usuario2 = User::factory()->create(['name' => 'Maria Santos']);
+        User::factory()->create(['name' => 'Pedro Costa']);
+
+        $this->actingAs($this->adminUser)
+            ->get(route('users.index', ['name' => 'João']))
+            ->assertOk()
+            ->assertInertia(function (Assert $page) use ($usuario1) {
+                $page->component('Users/Index')
+                    ->has('users')
+                    ->where('users.total', 1)
+                    ->where('users.data.0.name', $usuario1->name);
+            });
+    }
+
+    /**
+     * Testa se a filtragem por CPF funciona corretamente.
+     */
+    public function test_filtra_usuarios_por_cpf(): void
+    {
+        $usuario = User::factory()->create(['cpf' => '12345678901']);
+        User::factory()->create(['cpf' => '98765432100']);
+
+        $this->actingAs($this->adminUser)
+            ->get(route('users.index', ['cpf' => '12345678901']))
+            ->assertOk()
+            ->assertInertia(function (Assert $page) use ($usuario) {
+                $page->component('Users/Index')
+                    ->has('users')
+                    ->where('users.total', 1)
+                    ->where('users.data.0.cpf', $usuario->cpf);
+            });
+    }
+
+    /**
      * Testa se a página de um usuário específico é renderizada corretamente.
      */
     public function test_exibe_usuario_especifico_com_testamentos(): void
@@ -62,9 +101,7 @@ class UserControllerTest extends TestCase
      */
     public function test_retorna_nao_encontrado_para_usuario_invalido(): void
     {
-        $adminUser = User::factory()->create([
-            'is_admin' => true
-        ]);
+        $adminUser = User::factory()->create();
 
         $this->actingAs($adminUser)
             ->get(route('users.show', 999))
@@ -77,9 +114,7 @@ class UserControllerTest extends TestCase
     public function test_nega_acesso_listagem_para_usuarios_nao_admin(): void
     {
         // Cria um usuário comum (não admin)
-        $regularUser = User::factory()->create([
-            'is_admin' => false
-        ]);
+        $regularUser = User::factory()->create();
 
         $this->actingAs($regularUser)
             ->get(route('users.index'))
