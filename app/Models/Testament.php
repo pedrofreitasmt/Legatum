@@ -18,7 +18,6 @@ class Testament extends Model
         'title',
         'content',
         'recipient_email',
-        'is_encrypted',
         'sent_at',
         'status',
     ];
@@ -27,7 +26,6 @@ class Testament extends Model
         'created_at' => ConvertDateCast::class,
         'updated_at' => ConvertDateCast::class,
         'sent_at' => ConvertDateCast::class,
-        'content' => DecryptContentCast::class,
     ];
 
     public function testamentAttachments(): HasMany

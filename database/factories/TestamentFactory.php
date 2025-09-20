@@ -14,7 +14,6 @@ class TestamentFactory extends Factory
             'title' => fake()->sentence(3),
             'content' => fake()->paragraph(5),
             'recipient_email' => fake()->safeEmail(),
-            'is_encrypted' => false,
             'status' => 1,
         ];
     }
